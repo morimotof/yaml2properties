@@ -174,4 +174,5 @@ Wrote HTML report to htmlcov\index.html
 
 ### 標準入力からのunitテストが出来ていない
 
-![image](https://user-images.githubusercontent.com/22857955/168452365-2d803d39-4270-46b0-be69-7eacff3e8bd7.png)
+![image](https://user-images.githubusercontent.com/22857955/168456624-4adfe2f3-412f-4558-86b7-8de22f81ff6b.png)
+

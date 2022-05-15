@@ -1,0 +1,19 @@
+simple:
+  string: sample
+  kanji: 漢字を表示する
+  integer: 123
+  float: 4.56
+  true: true
+  false: false
+  date: 2015-7-27
+  blank:
+  quoted:
+    integer: "789"
+    true: "true"
+complex:
+  - name: test1
+    age: 10
+  - name: test2
+    age: 20
+  - name: test3
+    age: 30

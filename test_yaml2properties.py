@@ -81,19 +81,20 @@ class TestYaml2properties(unittest.TestCase):
         for k in list:
             assert k in TestYaml2properties.outlist, 'check key:' + k
 
+    # アトリビュートを持つオブジェクト(Inner)の場合を検証する
     def _mock_printout2(self, msg):
         TestYaml2properties.outlist.append(msg)
 
     class Inner:
         def __init__(self):
             self.caption = 'inner class caption'
-            self.date = datetime.date.today()
+            self.date = datetime.datetime.strptime('2022-05-15','%Y-%m-%d')
 
     @mock.patch("yaml2properties.Yaml2Properties.printout", new=_mock_printout2)
     def test_yaml2propertie_y2p(self):
         list = [
              'a.caption=inner class caption'
-            ,'a.date=2022-05-15'
+             ,'a.date=2022-05-15 00:00:00'
             ,'b[]=1'
             ,'c=string'
         ]
@@ -101,6 +102,12 @@ class TestYaml2properties(unittest.TestCase):
         yaml2properties.Yaml2Properties.of('test.yml',args).y2p('',{'a': self.Inner(),'b':[1],'c':'string'},'.')
         for k in list:
             assert k in TestYaml2properties.outlist, 'check key:' + k
+
+    def test_yaml2properties_file_not_exists(self):
+        with self.assertRaises(RuntimeError) as e:
+            args = yaml2properties.Yaml2Properties.parse_args(['-f','-i','test.yml'])
+            yaml2properties.Yaml2Properties.of('test.yml',args).convert()           
+
 
 if __name__ == "__main__":
     unittest.main()

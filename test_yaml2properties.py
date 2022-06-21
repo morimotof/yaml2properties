@@ -2,6 +2,7 @@ import unittest
 from unittest import mock
 import yaml2properties
 import datetime
+import object2properties
 
 class TestYaml2properties(unittest.TestCase):
 
@@ -27,8 +28,8 @@ class TestYaml2properties(unittest.TestCase):
         TestYaml2properties.outmap[path]=target
     
     # sample.ymlを変換した結果を検証する
-    @mock.patch("yaml2properties.Yaml2Properties.print_line", new=_mock_print_line)
-    def test_yaml2propertie_print_line(self):
+    @mock.patch("object2properties.Object2properties.print_line", new=_mock_print_line)
+    def test_object2properties_print_line(self):
         map = {
              '.simple.string':'sample'
             ,'.simple.kanji':'漢字を表示する'
@@ -57,8 +58,8 @@ class TestYaml2properties(unittest.TestCase):
         TestYaml2properties.outlist.append(msg)
 
     # sample.ymlを変換した結果を検証する
-    @mock.patch("yaml2properties.Yaml2Properties.printout", new=_mock_printout)
-    def test_yaml2propertie_printout(self):
+    @mock.patch("object2properties.Object2properties.printout", new=_mock_printout)
+    def test_object2properties_printout(self):
         list = [
              'sample.yml:simple.string=sample'
             ,'sample.yml:simple.kanji=漢字を表示する'
@@ -90,8 +91,8 @@ class TestYaml2properties(unittest.TestCase):
             self.caption = 'inner class caption'
             self.date = datetime.datetime.strptime('2022-05-15','%Y-%m-%d')
 
-    @mock.patch("yaml2properties.Yaml2Properties.printout", new=_mock_printout2)
-    def test_yaml2propertie_y2p(self):
+    @mock.patch("object2properties.Object2properties.printout", new=_mock_printout2)
+    def test_object2properties_convert(self):
         list = [
              'a.caption=inner class caption'
              ,'a.date=2022-05-15 00:00:00'
@@ -99,7 +100,8 @@ class TestYaml2properties(unittest.TestCase):
             ,'c=string'
         ]
         args = yaml2properties.Yaml2Properties.parse_args(['-f','-i','test.yml'])
-        yaml2properties.Yaml2Properties.of('test.yml',args).y2p('',{'a': self.Inner(),'b':[1],'c':'string'},'.')
+        o2p = object2properties.Object2properties('test.yml', args)
+        o2p.convert('',{'a': self.Inner(),'b':[1],'c':'string'})
         for k in list:
             assert k in TestYaml2properties.outlist, 'check key:' + k
 

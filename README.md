@@ -104,14 +104,15 @@ complex:
 ### unit テスト
 
 ```
-$ python -m coverage run test_yaml2properties.py -v
+$ python test_yaml2properties.py -v
+test_object2properties_convert (__main__.TestYaml2properties) ... ok
+test_object2properties_print_line (__main__.TestYaml2properties) ... ok
+test_object2properties_printout (__main__.TestYaml2properties) ... ok
 test_parse_args (__main__.TestYaml2properties) ... ok
-test_yaml2propertie_print_line (__main__.TestYaml2properties) ... ok
-test_yaml2propertie_printout (__main__.TestYaml2properties) ... ok
-test_yaml2propertie_y2p (__main__.TestYaml2properties) ... ok
+test_yaml2properties_file_not_exists (__main__.TestYaml2properties) ... ok
 
 ----------------------------------------------------------------------
-Ran 4 tests in 0.009s
+Ran 5 tests in 0.007s
 
 OK
 ```
@@ -154,19 +155,26 @@ coverage==6.3.3
 
 ```
 $ python -m coverage run test_yaml2properties.py
-...
+.....
 ----------------------------------------------------------------------
-Ran 3 tests in 0.009s
+Ran 5 tests in 0.013s
 
 OK
 
 $ python -m coverage report
-Name                      Stmts   Miss  Cover
----------------------------------------------
-test_yaml2properties.py      36      0   100%
-yaml2properties.py           76     12    84%
----------------------------------------------
-TOTAL                       112     12    89%
+Name                        Stmts   Miss  Cover
+-----------------------------------------------
+handlers\attr_handler.py        9      0   100%
+handlers\dict_handler.py        9      0   100%
+handlers\list_handler.py       12      0   100%
+handlers\none_handler.py        8      0   100%
+handlers\value_handler.py       8      1    88%
+ihandler.py                    10      2    80%
+object2properties.py           25      1    96%
+test_yaml2properties.py        57      0   100%
+yaml2properties.py             46      5    89%
+-----------------------------------------------
+TOTAL                         184      9    95%
 
 $ python -m coverage html
 Wrote HTML report to htmlcov\index.html

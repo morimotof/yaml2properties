@@ -1,6 +1,6 @@
-import ihandler as IOC
+from ihandler import IObjectHandler
 
-class ListHandler(IOC.IObjectHandler):
+class ListHandler(IObjectHandler):
 
     def test(self,target):
         if isinstance(target, list):

@@ -1,6 +1,6 @@
-import ihandler as IOC
+from ihandler import IObjectHandler
 
-class ValueHandler(IOC.IObjectHandler):
+class ValueHandler(IObjectHandler):
 
     def test(self,target):
         return True

@@ -1,2 +1,3 @@
 .coverage
 __pycache__/yaml2properties.cpython-38.pyc
+__pycache__/

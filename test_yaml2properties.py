@@ -1,8 +1,8 @@
 import unittest
-from unittest import mock
-import yaml2properties
 import datetime
-import object2properties
+from unittest import mock
+from yaml2properties import Yaml2Properties
+from object2properties import Object2properties
 
 class TestYaml2properties(unittest.TestCase):
 
@@ -17,7 +17,7 @@ class TestYaml2properties(unittest.TestCase):
 
     # 引数の処理を検証する
     def test_parse_args(self):
-        args = yaml2properties.Yaml2Properties.parse_args(['-f','-i','sample.yml'])
+        args = Yaml2Properties.parse_args(['-f','-i','sample.yml'])
 
         assert args.nofilename == True
         assert args.noindex == True
@@ -48,7 +48,7 @@ class TestYaml2properties(unittest.TestCase):
             ,'.complex[2].name':'test3'
             ,'.complex[2].age':30
         }
-        yaml2properties.Yaml2Properties.main(['-f','sample.yml'])
+        Yaml2Properties.main(['-f','sample.yml'])
         for k in map:
             v1 = map[k]
             v2 = TestYaml2properties.outmap.get(k,"")
@@ -78,7 +78,7 @@ class TestYaml2properties(unittest.TestCase):
             ,'sample.yml:complex[2].name=test3'
             ,'sample.yml:complex[2].age=30'
         ]
-        yaml2properties.Yaml2Properties.main(['sample.yml'])
+        Yaml2Properties.main(['sample.yml'])
         for k in list:
             assert k in TestYaml2properties.outlist, 'check key:' + k
 
@@ -99,16 +99,16 @@ class TestYaml2properties(unittest.TestCase):
             ,'b[]=1'
             ,'c=string'
         ]
-        args = yaml2properties.Yaml2Properties.parse_args(['-f','-i','test.yml'])
-        o2p = object2properties.Object2properties('test.yml', args)
+        args = Yaml2Properties.parse_args(['-f','-i','test.yml'])
+        o2p = Object2properties('test.yml', args)
         o2p.convert('',{'a': self.Inner(),'b':[1],'c':'string'})
         for k in list:
             assert k in TestYaml2properties.outlist, 'check key:' + k
 
     def test_yaml2properties_file_not_exists(self):
         with self.assertRaises(RuntimeError) as e:
-            args = yaml2properties.Yaml2Properties.parse_args(['-f','-i','test.yml'])
-            yaml2properties.Yaml2Properties.of('test.yml',args).convert()           
+            args = Yaml2Properties.parse_args(['-f','-i','test.yml'])
+            Yaml2Properties.of('test.yml',args).convert()           
 
 
 if __name__ == "__main__":

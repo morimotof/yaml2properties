@@ -38,8 +38,9 @@ class Object2properties:
             # handlerで処理できる場合はtestでTrueが返る
             if handler.test(target):
                 handler.action(path,target)
-                return
-        self.defaultHandler.action(path,target)
+                break
+        else:
+            self.defaultHandler.action(path,target)
 
     # pathとtarget(値)をフォーマットする
     def print_line(self, path, target):

@@ -26,8 +26,9 @@ class Object2properties:
             NoneHandler(self),
             ListHandler(self),
             AttrHandler(self),
-            ValueHandler(self), #これは最後に定義すること
         ]
+        # handlersのいずれでも実行されない場合に実行されるhandlerの登録
+        self.defaultHandler = ValueHandler(self)
     
     # targetに含まれるオプジェクトを解析する
     # 子オブジェクトが含まれる場合はhandler内から再帰的にconvertを呼び出す
@@ -37,7 +38,8 @@ class Object2properties:
             # handlerで処理できる場合はtestでTrueが返る
             if handler.test(target):
                 handler.action(path,target)
-                break
+                return
+        self.defaultHandler.action(path,target)
 
     # pathとtarget(値)をフォーマットする
     def print_line(self, path, target):

@@ -1,6 +1,6 @@
-import ihandler as IOC
+from ihandler import IObjectHandler
 
-class NoneHandler(IOC.IObjectHandler):
+class NoneHandler(IObjectHandler):
         
     def test(self,target):
         if target is None:

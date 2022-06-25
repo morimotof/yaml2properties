@@ -1,6 +1,6 @@
-import ihandler as IOC
+from ihandler import IObjectHandler
 
-class DictHandler(IOC.IObjectHandler):
+class DictHandler(IObjectHandler):
 
     def test(self,target):
         if isinstance(target, dict):

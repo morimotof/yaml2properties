@@ -1,6 +1,6 @@
-import ihandler as IOC
+from ihandler import IObjectHandler
 
-class AttrHandler(IOC.IObjectHandler):
+class AttrHandler(IObjectHandler):
     
     def test(self,target):
         if hasattr(target, '__dict__'):

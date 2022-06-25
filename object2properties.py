@@ -1,10 +1,10 @@
 import re
 # handler
-import handlers.dict_handler as DH
-import handlers.none_handler as NH
-import handlers.list_handler as LH
-import handlers.attr_handler as AH
-import handlers.value_handler as VH
+from handlers.dict_handler import DictHandler
+from handlers.none_handler import NoneHandler
+from handlers.list_handler import ListHandler
+from handlers.attr_handler import AttrHandler
+from handlers.value_handler import ValueHandler
 #import sys
 #import traceback
 
@@ -22,11 +22,11 @@ class Object2properties:
             self.fileName = fileName + ':'
         # handlerを登録する
         self.handlers=[
-            DH.DictHandler(self),
-            NH.NoneHandler(self),
-            LH.ListHandler(self),
-            AH.AttrHandler(self),
-            VH.ValueHandler(self), #これは最後に定義すること
+            DictHandler(self),
+            NoneHandler(self),
+            ListHandler(self),
+            AttrHandler(self),
+            ValueHandler(self), #これは最後に定義すること
         ]
     
     # targetに含まれるオプジェクトを解析する

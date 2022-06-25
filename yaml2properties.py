@@ -2,7 +2,7 @@ import argparse
 import io
 import os.path
 import sys
-import object2properties as O2P
+from object2properties import Object2properties
 import yaml as YML
 
 # yamlファイルを読み込んでproperties形式で出力する
@@ -64,7 +64,7 @@ class Yaml2Properties:
 
     # 変換開始
     def convert(self):
-        o2p = O2P.Object2properties(self.fileName, self.args)
+        o2p = Object2properties(self.fileName, self.args)
         if self.fileName == 'stdin':
             data = YML.load(sys.stdin,Loader=YML.SafeLoader)
             o2p.convert('',data)
